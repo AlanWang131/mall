@@ -35,6 +35,7 @@
 	import Scroll from 'components/common/scroll/Scroll'
 	import BackTop from 'components/content/backTop/BackTop'
 	
+	import {backTopMixin} from "common/mixin";
 	import {getHomeMultidata,getHomeGoods} from "network/home";
 	import {debounce} from "common/utils";
 	
@@ -49,8 +50,8 @@
       TabControl,
       GoodList,
 			Scroll,
-			BackTop
 		},
+		mixins: [backTopMixin],
 		data(){
 			return{
 				banners: [],
@@ -61,10 +62,10 @@
 					'sell': {page: 0, list: []},
 				},
 				currentType: 'pop',
-				isShowBackTop: false,
 				tabOffsetTop: 0,
 				isTabFixed: false,
-				saveY: 0
+				saveY: 0,
+				
 			}
 		},
 		computed: {
@@ -80,7 +81,10 @@
 		  this.$refs.scroll.refresh()
 		},
 		deactivated() {
+			
 		  this.saveY = this.$refs.scroll.getScrollY()
+			
+			
 		},
 		created() {
 			//1.请求多个数据
@@ -116,9 +120,6 @@
 			  }
 				this.$refs.tabControl1.currentIndex = index;
 				  this.$refs.tabControl2.currentIndex = index;
-			},
-			backClick() {
-			  this.$refs.scroll.scrollTo(0, 0, 500)
 			},
 			contentScroll(position) {
 			  // 1.判断BackTop是否显示

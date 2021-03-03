@@ -15,6 +15,7 @@
     position: fixed;
     right: 8px;
     bottom: 55px;
+		z-index: 999;
   }
 
   .back-top img {

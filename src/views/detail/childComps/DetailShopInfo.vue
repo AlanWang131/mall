@@ -8,7 +8,7 @@
       <div class="shop-middle-item shop-middle-left">
         <div class="info-sells">
           <div class="sells-count">
-            {{shop.sells | sellCountFilter}}
+            {{shop.sells | debounce}}
           </div>
           <div class="sells-text">总销量</div>
         </div>
@@ -47,9 +47,9 @@
       }
     },
     filters: {
-      sellCountFilter: function (value) {
+      debounce: function (value) {
         if (value < 10000) return value;
-        return (value/10000).toFixed(1) + '万'
+        return (value/10000).toFixed(1) + '万';
       }
     }
 	}
