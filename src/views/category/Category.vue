@@ -8,9 +8,7 @@
       <scroll id="tab-content" :data="[categoryData]">
         <div>
           <tab-content-category :subcategories="showSubcategory"></tab-content-category>
-          <tab-control :titles="['综合', '新品', '销量']"
-                       @itemClick="tabClick"></tab-control>
-          <tab-content-detail :category-detail="showCategoryDetail"></tab-content-detail>
+         
         </div>
       </scroll>
     </div>
@@ -57,10 +55,6 @@
 		  showSubcategory() {
 		    if (this.currentIndex === -1) return {}
         return this.categoryData[this.currentIndex].subcategories
-      },
-      showCategoryDetail() {
-		    if (this.currentIndex === -1) return []
-		    return this.categoryData[this.currentIndex].categoryDetail[this.currentType]
       }
     },
     methods: {
@@ -95,9 +89,7 @@
         getSubcategory(mailKey).then(res => {
           this.categoryData[index].subcategories = res.data
           this.categoryData = {...this.categoryData}
-          this._getCategoryDetail(POP)
-          this._getCategoryDetail(SELL)
-          this._getCategoryDetail(NEW)
+
         })
       },
       _getCategoryDetail(type) {
@@ -129,7 +121,10 @@
     background-color: var(--color-tint);
     font-weight: 700;
     color: #fff;
-		
+		position: absolute;
+		z-index: 2;
+		left: 0;
+		right: 0;
   }
 
   .content {
@@ -145,6 +140,5 @@
   #tab-content {
     height: 100%;
     flex: 1;
-		
   }
 </style>
